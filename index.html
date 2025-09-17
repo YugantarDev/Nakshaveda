@@ -23,7 +23,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1627914023773-674438186259?q=80&w=2670&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1627914023773-674438186259?q=80&w=2670&auto=format&fit=fit');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -69,6 +69,21 @@
             transition: transform 0.1s ease-out, opacity 0.1s ease-out;
         }
 
+        /* Logo Styling - Now inside the nav list */
+        .nav-logo a {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #FFD7C5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo a:hover {
+            color: #FFD7C5;
+            transform: scale(1.05);
+        }
+
         /* Navigation Menu - Desktop View */
         nav {
             position: absolute;
@@ -84,10 +99,17 @@
             display: flex;
             justify-content: center;
             margin: 0;
+            align-items: center;
         }
 
         nav li {
             margin: 0 15px;
+        }
+        
+        /* Specific styling for the logo list item */
+        .nav-logo {
+            margin-right: auto;
+            margin-left: 20px;
         }
 
         nav a {
@@ -103,7 +125,7 @@
         }
         
         /* All content sections to animate */
-        .intro-section, .cards-container, .form-container, .section {
+        .intro-section, .cards-container, .form-section, .section {
             opacity: 0;
             transform: scale(0.8);
             transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -212,43 +234,52 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        /* Form Container */
-        .form-container {
-            position: static;
+        /* New Two-Column Form Section */
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 10%;
+            background-color: #f8f0e3;
+        }
+        
+        .form-left {
+            flex: 1;
+            padding-right: 40px;
+            text-align: right;
+        }
+        
+        .form-right {
+            flex: 1;
             background-color: #ffffff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 300px;
-            margin: 40px auto;
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
-        }
-        
-        .form-container:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            max-width: 400px;
         }
 
-        .form-title {
+        .form-right .form-title {
             font-family: 'Roboto Slab', serif;
             font-size: 1.5em;
             color: #5d4037;
             margin-bottom: 20px;
             text-align: center;
         }
-
+        
         .form-group {
             margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
+        
         .form-group label {
-            display: block;
-            margin-bottom: 5px;
+            width: 100%;
             font-weight: 500;
             color: #3e2723;
         }
 
-        .form-group input,
-        .form-group select {
+        .form-group input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -258,6 +289,11 @@
             box-sizing: border-box;
         }
 
+        .form-group input.half-width {
+            flex: 1;
+            min-width: 120px;
+        }
+        
         .form-group button {
             width: 100%;
             padding: 12px;
@@ -315,27 +351,30 @@
                 z-index: 30;
             }
 
-                nav ul {
-        display: flex;
-        flex-direction: column;
-        background-color: rgba(84, 0, 0, 0.9);
-        width: 100%;
-        height: 90vh;
-        text-align: center;
-        padding-top: 50px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s 
-ease-in-out;
-        transform-origin: top;
-        transform: scaleX(0.9) scaleY(0);
-        border-bottom-left-radius: 50%;
-        border-bottom-right-radius: 50%;
-        justify-content: flex-start;
-    }
+            .nav-logo a {
+                font-size: 1.5em;
+            }
+
+            nav ul {
+                display: flex;
+                flex-direction: column;
+                background-color: rgba(84, 0, 0, 0.9);
+                width: 100%;
+                height: 90vh;
+                text-align: center;
+                padding-top: 50px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+                transform-origin: top;
+                transform: scaleX(0.9) scaleY(0);
+                border-bottom-left-radius: 50%;
+                border-bottom-right-radius: 50%;
+                justify-content: flex-start;
+            }
 
             nav.open ul {
                 max-height: 90vh;
@@ -365,15 +404,25 @@ ease-in-out;
             nav.open li:nth-child(3) { transition-delay: 0.3s; }
             nav.open li:nth-child(4) { transition-delay: 0.4s; }
 
+            /* Hide the logo list item inside the menu */
+            .nav-logo {
+                display: none;
+            }
+
             /* Main content styles for mobile */
-            .intro-section {
+            .intro-section, .form-section {
                 flex-direction: column;
                 padding: 40px 20px;
             }
-            .intro-section-left {
+            .intro-section-left, .form-left {
                 padding-right: 0;
                 text-align: center;
                 margin-bottom: 20px;
+            }
+            .form-right {
+                width: 100%;
+                box-sizing: border-box;
+                margin: 0 auto;
             }
             .card-section {
                 padding: 40px 10px;
@@ -385,14 +434,30 @@ ease-in-out;
             .card {
                 max-width: 100%;
             }
-            .form-container {
-                width: 100%;
-                box-sizing: border-box;
-                margin: 20px auto;
-            }
             .container {
                 width: 100%;
                 padding: 20px 0;
+            }
+        }
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+            nav ul {
+                display: flex;
+                height: auto;
+                max-height: none;
+                flex-direction: row;
+                background-color: transparent;
+                padding-top: 0;
+                position: static;
+                transform: none;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            nav li {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         </style>
@@ -402,6 +467,9 @@ ease-in-out;
             <nav>
                 <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
                 <ul>
+                    <li class="nav-logo">
+                        <a href="#">Nakshaveda</a>
+                    </li>
                     <li>
                         <a href="#horoscopes">Horoscopes</a>
                     </li>
@@ -458,41 +526,30 @@ ease-in-out;
                 </div>
             </div>
         </section>
-        <div class="form-container">
-            <h3 class="form-title">Book a Consultation</h3>
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="email">Email ID</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="purpose">Purpose</label>
-                    <select id="purpose" name="purpose">
-                        <option value="marriage">Marriage</option>
-                        <option value="career">Career</option>
-                        <option value="kundali">Kundali</option>
-                        <option value="others">Others</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
+        <section class="form-section">
+            <div class="form-left">
+                <h2 class="heading">Sign up and Discover Your Cosmic Path</h2>
+                <p>Unlock the secrets of the stars. By joining our community, you'll gain access to personalized insights, daily horoscopes, and exclusive articles designed to help you navigate life with the wisdom of the cosmos.</p>
+            </div>
+            <div class="form-right">
+                <h3 class="form-title">Sign Up - It's Free.</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <input type="text" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="email" placeholder="Re-enter Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </section>
         <div class="container">
             <div id="horoscopes" class="section">
                 <h2 class="section-title">Daily Horoscopes</h2>
@@ -508,13 +565,13 @@ ease-in-out;
             </div>
         </div>
         <footer>
-            <p>&copy; 2024 Celestial Compass. All rights reserved.</p>
+            <p>&copy; 2024 Nakshaveda. All rights reserved.</p>
         </footer>
         <script>
         document.addEventListener('DOMContentLoaded', () => {
             const heroTitle = document.querySelector('.hero-title');
             const heroSubtitle = document.querySelector('.hero-subtitle');
-            const contentSections = document.querySelectorAll('.intro-section, .cards-container, .form-container, .section');
+            const contentSections = document.querySelectorAll('.intro-section, .cards-container, .form-section, .section');
             const menuToggle = document.querySelector('.menu-toggle');
             const nav = document.querySelector('nav');
 
