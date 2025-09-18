@@ -124,6 +124,7 @@
             justify-content: center;
             margin: 0;
             align-items: center;
+             font-family: 'Roboto', sans-serif;
         }
 
         nav li {
@@ -407,12 +408,11 @@
             }
 
             nav.open ul {
-                max-height: 90vh;
-                
+                max-height: 50vh;
+                border-bottom-left-radius: 40px;
+                border-bottom-right-radius: 40px;
                 /* New: expands to full size and straightens out */
                 transform: scaleX(1) scaleY(1);
-                border-bottom-left-radius: 0;
-                border-bottom-right-radius: 0;
                 transition: max-height 1s ease-in-out, transform 1s ease-in-out, border-radius 1s ease-in-out;
             }
 
@@ -552,16 +552,29 @@
                         <a href="#">Nakshaveda</a>
                     </li>
                     <li>
-                        <a href="#horoscopes">Horoscopes</a>
+                        <a href="#home">Home</a>
                     </li>
                     <li>
-                        <a href="#zodiac-profiles">Zodiac Signs</a>
+                        <a href="#about">About Us</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="#astrologers">Astrologers</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="#blogs">Blogs</a>
+                    </li>
+                    <li>
+                        <a href="#packages">Subscription Packages</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact Us</a>
+                    </li>
+                    <li style="
+    background-color: #4275ff;
+    padding: 5px 20px;
+    border-radius: 10px;
+">
+                        <a href="#login">Login</a>
                     </li>
                 </ul>
             </nav>
