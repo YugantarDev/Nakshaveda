@@ -225,6 +225,14 @@
             animateSections();
         });
     });
+
+    // Navigation toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('nav ul'); // target ul
+
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('open'); // add/remove 'open' class
+});
         </script>
     </body>
 </html>

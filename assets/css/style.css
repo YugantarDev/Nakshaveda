@@ -97,12 +97,11 @@ body {
     transform: scale(1.05);
 }
 
-/* Navigation Menu */
+/* --- Navigation Menu --- */
 nav {
     position: absolute;
-    top: 0px;
+    top: 0;
     width: 100%;
-    height: 100%;
     z-index: 20;
 }
 
@@ -110,26 +109,27 @@ nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: center;
-    margin: 0;
+    /* default: desktop horizontal */
+    /* justify-content: center; */
     align-items: center;
+    margin: 0;
     font-family: 'Roboto', sans-serif;
+    flex-direction: row;
+    background-color: transparent;
+    position: static;
+    justify-content: space-around;
 }
 
 nav li {
     margin: 0 15px;
-}
-
-.nav-logo {
-    margin-right: auto;
-    margin-left: 20px;
+    text-align: center;
 }
 
 nav a {
     text-decoration: none;
     color: #fff;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1em;
     transition: color 0.3s ease;
 }
 
@@ -137,14 +137,28 @@ nav a:hover {
     color: #FFD7C5;
 }
 
-/* Content Animation */
+/* Menu Toggle Button (mobile) */
+.menu-toggle {
+    display: none;
+    /* hidden on desktop */
+    font-size: 2em;
+    color: #fff;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* --- Intro Section & Content Animations --- */
 .intro-section, .cards-container, .form-section, .section {
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
-/* Two-Column Intro Section */
 .intro-section {
     display: flex;
     align-items: center;
@@ -190,31 +204,22 @@ nav a:hover {
     color: #5d4037;
 }
 
-.intro-section-right, .form-left {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
 /* Card Section */
 .card-section {
     padding: 60px 10%;
     background-color: #f8f0e3;
 }
 
-/* Cards Container */
 .cards-container {
     display: flex;
     justify-content: space-around;
-    /* space around two cards */
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px 0;
 }
 
-/* Individual Card */
 .card {
     width: 45%;
-    /* two cards per row */
     max-width: 45%;
     height: 380px;
     background-color: #fff;
@@ -236,19 +241,6 @@ nav a:hover {
     color: #AB0000;
     margin-bottom: 15px;
 }
-
-/* Cards Animation */
-.card {
-    transform: translateY(40px);
-    opacity: 1;
-    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-}
-
-.card.visible {
-    transform: translateY(0);
-    opacity: 1;
-}
-
 
 .card-title {
     font-family: 'Roboto Slab', serif;
@@ -311,12 +303,6 @@ nav a:hover {
     gap: 10px;
 }
 
-.form-group label {
-    width: 100%;
-    font-weight: 500;
-    color: #3e2723;
-}
-
 .form-group input {
     width: 100%;
     padding: 10px;
@@ -324,12 +310,6 @@ nav a:hover {
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
-    box-sizing: border-box;
-}
-
-.form-group input.half-width {
-    flex: 1;
-    min-width: 120px;
 }
 
 .form-group button {
@@ -362,9 +342,8 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(255 255 255 / 95%);
+    background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0px 0px 10px 2px #c16b65;
-    color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -381,12 +360,11 @@ footer {
 
 .sticky-form.active {
     transform: translateY(0);
-    /* slide in */
 }
 
 .sticky-form p {
     font-family: 'Caveat';
-    font-size: 3.2em;
+    font-size: 2em;
     margin: 0;
     flex: 1 1 auto;
     min-width: 200px;
@@ -408,8 +386,38 @@ footer {
     transform: scale(1.05);
 }
 
-/* --- Responsive Media Queries --- */
+/* --- Responsive Nav & Sections --- */
 @media (max-width: 768px) {
+
+    /* Show menu toggle */
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.85);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        display: none;
+        /* hidden by default on mobile */
+        padding: 20px 0;
+        margin: 0;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    nav ul.open {
+        display: flex;
+        /* show when menu is open */
+    }
+
+    nav li {
+        margin: 10px 0;
+    }
+
     .intro-section, .form-section {
         flex-direction: column;
         padding: 40px 20px;
@@ -450,20 +458,25 @@ footer {
     }
 
     nav ul {
-        display: flex;
-        height: auto;
-        max-height: none;
+        display: flex !important;
+        /* always show on desktop */
         flex-direction: row;
         background-color: transparent;
-        padding-top: 0;
         position: static;
-        transform: none;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        height: auto;
+        max-height: none;
     }
 
     nav li {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Mobile landscape adjustments */
+@media (max-width: 1024px) and (orientation: landscape) {
+    nav ul li a {
+        font-size: 0.85em;
+        /* shrink text slightly */
     }
 }
