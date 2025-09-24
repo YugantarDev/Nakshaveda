@@ -7,541 +7,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-        <style>
-        /* General Body Styles */
-
-        @font-face {
-            font-family: 'StoryScript';
-            src: url(./assets/fonts/Story_Script/StoryScript-Regular.ttf);
-        }
-        
-@font-face {
-    font-family: 'Caveat';
-    src: url(./assets/fonts/Caveat/Caveat-VariableFont_wght.ttf);
-}
-* {
-    box-sizing: border-box;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f0e3;
-            color: #3e2723;
-            line-height: 1.6;
-        }
-
-        /* Hero Header Section */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 80vh;
-            background-image: url('https://images.unsplash.com/photo-1627914023773-674438186259?q=80&w=2670&auto=format&fit=fit');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-family: 'StoryScript';
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(84, 0, 0, 0.8) 0%, rgba(171, 0, 0, 0.5) 100%);
-        }
-
-        .hero-content {
-            z-index: 10;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .hero-title {
-            font-family: 'Roboto Slab', serif;
-            font-size: 4em;
-            color: #FFD7C5;
-            margin: 0;
-            transform: scale(1);
-            opacity: 1;
-            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5em;
-            font-weight: 300;
-            color: #fff;
-            transform: scale(1);
-            opacity: 1;
-            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-        }
-
-        @media (max-width: 768px) {
-    .hero {
-        background-attachment: scroll;
-    }
-}
-
-        /* Logo Styling - Now inside the nav list */
-        .nav-logo a {
-            font-family: 'Roboto Slab', serif;
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #FFD7C5;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .nav-logo a:hover {
-            color: #FFD7C5;
-            transform: scale(1.05);
-        }
-
-        /* Navigation Menu - Desktop View */
-        nav {
-            position: absolute;
-            top: 0px;
-            width: 100%;
-            height: 100%;
-            z-index: 20;
-        }
-        
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            align-items: center;
-             font-family: 'Roboto', sans-serif;
-        }
-
-        nav li {
-            margin: 0 15px;
-        }
-        
-        /* Specific styling for the logo list item */
-        .nav-logo {
-            margin-right: auto;
-            margin-left: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: 500;
-            font-size: 1.1em;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #FFD7C5;
-        }
-        
-        /* All content sections to animate */
-        .intro-section, .cards-container, .form-section, .section {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        }
-
-        /* Two-Column Intro Section */
-        .intro-section {
-            display: flex;
-            align-items: center;
-            padding: 80px 10%;
-            background-color: #FFD7C5;
-        }
-
-        .intro-section-left {
-            flex: 1;
-            padding-right: 40px;
-        }
-
-        .intro-section-left .subheading {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            font-size: 0.8em;
-            color: #AB0000;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .intro-section-left .heading {
-            font-family: 'Roboto Slab', serif;
-            font-size: 2.8em;
-            font-weight: 700;
-            color: #540000;
-            line-height: 1.2;
-            margin: 0;
-        }
-
-        .intro-section-right {
-            flex: 1;
-            font-size: 1.1em;
-            color: #3e2723;
-        }
-
-        .intro-section-right p {
-            margin-bottom: 20px;
-        }
-
-        .intro-section-right strong {
-            color: #5d4037;
-        }
-
-        .intro-section-right, .form-left {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-
-        /* New Card Section */
-        .card-section {
-            padding: 60px 10%;
-            background-color: #f8f0e3;
-        }
-
-        .cards-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .card {
-            background-color: #fff;
-            padding: 25px; 
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            flex: 1 1 200px;
-            max-width: 250px;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .card-icon {
-            font-size: 3em;
-            color: #AB0000;
-            margin-bottom: 15px;
-        }
-        
-        .card-title {
-            font-family: 'Roboto Slab', serif;
-            font-size: 1.5em;
-            color: #540000;
-            margin: 0 0 10px 0;
-        }
-
-        /* Main Content Section */
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        .section {
-            background-color: #fff;
-            padding: 40px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        /* New Two-Column Form Section */
-        .form-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 10%;
-            background-color: #f8f0e3;
-        }
-        
-        .form-left {
-            flex: 1;
-            padding-right: 40px;
-            text-align: right;
-        }
-        
-        .form-right {
-            flex: 1;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            max-width: 400px;
-        }
-
-        .form-right .form-title {
-            font-family: 'Roboto Slab', serif;
-            font-size: 1.5em;
-            color: #5d4037;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .form-group label {
-            width: 100%;
-            font-weight: 500;
-            color: #3e2723;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1em;
-            box-sizing: border-box;
-        }
-
-        .form-group input.half-width {
-            flex: 1;
-            min-width: 120px;
-        }
-        
-        .form-group button {
-            width: 100%;
-            padding: 12px;
-            background-image: linear-gradient(180deg, rgba(84, 0, 0, 0.8) 0%, rgba(171, 0, 0, 0.5) 100%);
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .form-group button:hover {
-            transform: scale(1.05);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            background-image: linear-gradient(180deg, rgba(84, 0, 0, 0.8) 0%, rgba(171, 0, 0, 0.5) 100%);
-            color: #fff;
-        }
-
-        /* Keyframes for On-Load effect (still needed for hero section) */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* --- Media Queries for Mobile Screens --- */
-        @media (max-width: 768px) {
-            body {
-                padding: 0 15px;
-            }
-            
-            /* Mobile Navigation */
-            nav {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                
-            }
-
-            .menu-toggle {
-                display: block;
-                background: transparent;
-                border: none;
-                color: #fff;
-                font-size: 2em;
-                cursor: pointer;
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                z-index: 30;
-            }
-
-            .nav-logo a {
-                font-size: 1.5em;
-            }
-
-            nav ul {
-                display: flex;
-                flex-direction: column;
-                background-color: rgba(84, 0, 0, 0.9);
-                width: 100%;
-                height: 90vh;
-                text-align: center;
-                padding-top: 50px;
-                position: absolute;
-                top: 0;
-                right: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-in-out;
-                transform-origin: top;
-                transform: scaleX(0.9) scaleY(0);
-                border-bottom-left-radius: 50%;
-                border-bottom-right-radius: 50%;
-                justify-content: flex-start;
-            }
-
-            nav.open ul {
-                max-height: 50vh;
-                border-bottom-left-radius: 40px;
-                border-bottom-right-radius: 40px;
-                /* New: expands to full size and straightens out */
-                transform: scaleX(1) scaleY(1);
-                transition: max-height 1s ease-in-out, transform 1s ease-in-out, border-radius 1s ease-in-out;
-            }
-
-            nav li {
-                margin: 10px 0;
-                opacity: 0;
-                transform: translateY(-20px);
-                transition: opacity 0.5s ease, transform 0.5s ease;
-            }
-
-            nav.open li {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            /* Staggered transition for a sequential drop effect */
-            nav.open li:nth-child(1) { transition-delay: 0.1s; }
-            nav.open li:nth-child(2) { transition-delay: 0.2s; }
-            nav.open li:nth-child(3) { transition-delay: 0.3s; }
-            nav.open li:nth-child(4) { transition-delay: 0.4s; }
-
-            /* Hide the logo list item inside the menu */
-            .nav-logo {
-                display: none;
-            }
-
-            /* Main content styles for mobile */
-            .intro-section, .form-section {
-                flex-direction: column;
-                padding: 40px 20px;
-            }
-            .intro-section-left, .form-left {
-                padding-right: 0;
-                text-align: center;
-                margin-bottom: 20px;
-            }
-            .form-right {
-                width: 100%;
-                box-sizing: border-box;
-                margin: 0 auto;
-            }
-            .card-section {
-                padding: 40px 10px;
-            }
-            .cards-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .card {
-                max-width: 100%;
-            }
-            .container {
-                width: 100%;
-                padding: 20px 0;
-            }
-        }
-        @media (min-width: 769px) {
-            .menu-toggle {
-                display: none;
-            }
-            nav ul {
-                display: flex;
-                height: auto;
-                max-height: none;
-                flex-direction: row;
-                background-color: transparent;
-                padding-top: 0;
-                position: static;
-                transform: none;
-                border-bottom-left-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-            nav li {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sticky Bottom Form */
-.sticky-form {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgb(255 255 255 / 95%);
-    box-shadow: 0px 0px 10px 2px #c16b65;
-    color: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.5s ease-in-out;
-    z-index: 100;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    padding: 20px;
-}
-
-.sticky-form.active {
-    transform: translateY(0); /* slide in */
-}
-
-.sticky-form p {
-    font-family: 'Caveat';
-    font-size: 3.2em;
-    margin: 0; /* remove bottom margin to stay aligned */
-    flex: 1 1 auto; /* allow text to take available space */
-    min-width: 200px; /* optional, prevent it from getting too small */
-}
-
-.sticky-form button {
-    padding: 12px 30px;
-    background-image: linear-gradient(180deg, rgba(255, 215, 197, 0.8) 0%, rgba(171, 0, 0, 0.8) 100%);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2em;
-    cursor: pointer;
-    flex-shrink: 0; /* prevent button from shrinking */
-    transition: transform 0.3s ease;
-}
-
-.sticky-form button:hover {
-    transform: scale(1.05);
-}
-        </style>
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <script src="./assets/js/content.js"></script>
     </head>
     <body>
         <header class="hero">
@@ -569,56 +36,25 @@
                     <li>
                         <a href="#contact">Contact Us</a>
                     </li>
-                    <li style="
-    background-color: #4275ff;
-    padding: 5px 20px;
-    border-radius: 10px;
-">
+                    <li style="background-color: #4275ff; padding: 5px 20px; border-radius: 10px;">
                         <a href="#login">Login</a>
                     </li>
                 </ul>
             </nav>
             <div class="hero-content">
-                <h1 class="hero-title">Celestial Compass</h1>
-                <p class="hero-subtitle">Your Guide to the Stars and Beyond</p>
+                <h1 class="hero-title"></h1>
+                <p class="hero-subtitle"></p>
             </div>
         </header>
         <section class="intro-section">
             <div class="intro-section-left">
-                <div class="subheading">WELCOME TO THE COSMOS</div>
-                <h2 class="heading">Astrology literally means “The Study of the Stars.”</h2>
+                <div class="subheading"></div>
+                <h2 class="heading"></h2>
             </div>
-            <div class="intro-section-right">
-                <p>Astrology is an ancient practice that explores the relationships between celestial bodies and human events on Earth. By studying the positions of the planets and stars at the time of your birth, we can create a birth chart to reveal your unique personality, potential, and life path.</p>
-                <p>
-                    <strong>Celestial Compass is dedicated to providing you with the insights and guidance you seek.</strong>
-                    Our mission is to help you understand your place in the universe, empowering you to live a more harmonious and fulfilling life.
-                </p>
-            </div>
+            <div class="intro-section-right"></div>
         </section>
         <section class="card-section">
-            <div class="cards-container">
-                <div class="card">
-                    <div class="card-icon">☀️</div>
-                    <h3 class="card-title">Your Sun Sign</h3>
-                    <p>The core of your personality and identity. Your Sun sign reflects your fundamental character and ego.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🌙</div>
-                    <h3 class="card-title">Your Moon Sign</h3>
-                    <p>Represents your inner world, emotions, and intuition. It reveals your deepest feelings and how you react to life.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">⬆️</div>
-                    <h3 class="card-title">Your Rising Sign</h3>
-                    <p>This is your astrological mask, representing how you appear to others and your first impressions.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">✨</div>
-                    <h3 class="card-title">Planetary Transits</h3>
-                    <p>Explore how current planetary movements affect your life, opportunities, and challenges.</p>
-                </div>
-            </div>
+            <div class="cards-container"></div>
         </section>
         <section class="form-section">
             <div class="form-left">
@@ -644,20 +80,7 @@
                 </form>
             </div>
         </section>
-        <div class="container">
-            <div id="horoscopes" class="section">
-                <h2 class="section-title">Daily Horoscopes</h2>
-                <p>Your daily forecast awaits. Select your zodiac sign for cosmic guidance.</p>
-            </div>
-            <div id="zodiac-profiles" class="section">
-                <h2 class="section-title">Zodiac Sign Profiles</h2>
-                <p>Explore the traits, strengths, and challenges of each of the twelve signs. Discover what makes each one unique.</p>
-            </div>
-            <div id="articles" class="section">
-                <h2 class="section-title">Astrology Blog</h2>
-                <p>Dive deep into topics like planetary retrogrades, moon phases, and how celestial events impact your life.</p>
-            </div>
-        </div>
+        <div class="container"></div>
         <footer>
             <p>&copy; 2024 Nakshaveda. All rights reserved.</p>
         </footer>
@@ -666,59 +89,142 @@
             <button id="stickyJoinBtn">Join</button>
         </div>
         <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroTitle = document.querySelector('.hero-title');
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            const contentSections = document.querySelectorAll('.intro-section, .cards-container, .form-section, .section');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('nav');
+    document.addEventListener('DOMContentLoaded', () => {
+        // Populate Hero
+        document.querySelector('.hero-title').textContent = siteContent.hero.title;
+        document.querySelector('.hero-subtitle').textContent = siteContent.hero.subtitle;
 
-            menuToggle.addEventListener('click', () => {
-                nav.classList.toggle('open');
-            });
+        // Populate Intro Section
+        const introLeft = document.querySelector('.intro-section-left');
+        const introRight = document.querySelector('.intro-section-right');
+        introLeft.querySelector('.subheading').textContent = siteContent.intro.subheading;
+        introLeft.querySelector('.heading').textContent = siteContent.intro.heading;
+        siteContent.intro.paragraphs.forEach(p => {
+            const para = document.createElement('p');
+            para.textContent = p;
+            introRight.appendChild(para);
+        });
 
-            window.addEventListener('scroll', () => {
-                const scrollPosition = window.scrollY;
-                const heroHeight = window.innerHeight;
+        // Populate Cards
+        const cardsContainer = document.querySelector('.cards-container');
+        siteContent.cards.forEach(card => {
+            const cardEl = document.createElement('div');
+            cardEl.classList.add('card');
+            cardEl.innerHTML = `
+                <div class="card-icon">${card.icon}</div>
+                <h3 class="card-title">${card.title}</h3>
+                <p>${card.description}</p>
+            `;
+            cardsContainer.appendChild(cardEl);
+        });
 
-                const heroScaleValue = Math.max(0.5, 1 - scrollPosition / (heroHeight * 0.7));
-                const heroOpacityValue = Math.max(0, 1 - scrollPosition / (heroHeight * 0.7));
-                heroTitle.style.transform = `scale(${heroScaleValue})`;
-                heroTitle.style.opacity = heroOpacityValue;
-                heroSubtitle.style.transform = `scale(${heroScaleValue})`;
-                heroSubtitle.style.opacity = heroOpacityValue;
+        // Select cards AFTER creating them
+        let cards = document.querySelectorAll('.card');
 
-                contentSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const viewportCenter = window.innerHeight / 2;
-                    const elementCenter = rect.top + (rect.height / 2);
-                    const distance = Math.abs(viewportCenter - elementCenter);
-                    const maxDistance = window.innerHeight / 2 + rect.height / 2;
-                    const progress = 1 - Math.min(1, distance / maxDistance);
-                    
-                    const opacity = progress * 1.2;
-                    const scale = 0.8 + (progress * 0.2);
+        // Populate Sections
+        const container = document.querySelector('.container');
+        siteContent.sections.forEach(section => {
+            const sec = document.createElement('div');
+            sec.id = section.id;
+            sec.classList.add('section');
+            sec.innerHTML = `
+                <h2 class="section-title">${section.title}</h2>
+                <p>${section.content}</p>
+            `;
+            container.appendChild(sec);
+        });
 
-                    section.style.opacity = opacity;
-                    section.style.transform = `scale(${scale})`;
-                });
-            });
+        // Navigation toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('open');
         });
 
         // Sticky Bottom Form
-const stickyForm = document.getElementById('stickyForm');
-const stickyJoinBtn = document.getElementById('stickyJoinBtn');
+        const stickyForm = document.getElementById('stickyForm');
+        const stickyJoinBtn = document.getElementById('stickyJoinBtn');
+        setTimeout(() => stickyForm.classList.add('active'), 200);
+        stickyJoinBtn.addEventListener('click', () => {
+            stickyForm.classList.remove('active');
+            alert("Thanks for joining!");
+        });
 
-// Show the sticky form after 2 seconds (or adjust as needed)
-setTimeout(() => {
-    stickyForm.classList.add('active');
-}, 200);
+        // Scroll Animations
+        const contentSections = document.querySelectorAll('.intro-section, .cards-container, .form-section, .section');
+        let viewportHeight = window.innerHeight;
 
-// Click Join button closes the sticky form
-stickyJoinBtn.addEventListener('click', () => {
-    stickyForm.classList.remove('active');
-    alert("Thanks for joining!"); // Replace with real action if needed
-});
+        function animateCards() {
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenter = rect.top + rect.height / 2;
+                const viewportCenter = viewportHeight / 2;
+
+                if (rect.bottom < 0 || rect.top > viewportHeight) {
+                    card.style.transform = `perspective(1000px) translateY(40px) rotateX(-90deg) rotateY(-45deg) rotateZ(-45deg)`;
+                    card.style.transition = `transform 0.3s ease-in-out`;
+                    return;
+                }
+
+                let progress = cardCenter > viewportCenter ? Math.min((viewportHeight - cardCenter) / (viewportHeight / 2), 1) : 1;
+                progress = Math.max(progress, 0);
+                const rotateX = -90 * (1 - progress);
+                const rotateY = -45 * (1 - progress);
+                const rotateZ = -45 * (1 - progress);
+                const translateY = 40 * (1 - progress);
+
+                card.style.transform = `perspective(1000px) translateY(${translateY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+                card.style.transition = `transform 0.1s ease-out`;
+
+                if (progress === 1) {
+                    card.style.transform = `perspective(1000px) translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+                    card.style.transition = `transform 0.3s ease-in-out`;
+                }
+            });
+        }
+
+        function animateSections() {
+            contentSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const viewportCenter = window.innerHeight / 2;
+                const elementCenter = rect.top + rect.height / 2;
+                const distance = Math.abs(viewportCenter - elementCenter);
+                const maxDistance = window.innerHeight / 2 + rect.height / 2;
+                const progress = 1 - Math.min(1, distance / maxDistance);
+                const opacity = progress * 1.2;
+                const scale = 0.8 + (progress * 0.2);
+                section.style.opacity = opacity;
+                section.style.transform = `scale(${scale})`;
+            });
+        }
+
+        // Initial animation
+        animateCards();
+        animateSections();
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const heroHeight = window.innerHeight;
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+
+            const heroScaleValue = Math.max(0.5, 1 - scrollPosition / (heroHeight * 0.7));
+            const heroOpacityValue = Math.max(0, 1 - scrollPosition / (heroHeight * 0.7));
+            heroTitle.style.transform = `scale(${heroScaleValue})`;
+            heroTitle.style.opacity = heroOpacityValue;
+            heroSubtitle.style.transform = `scale(${heroScaleValue})`;
+            heroSubtitle.style.opacity = heroOpacityValue;
+
+            animateCards();
+            animateSections();
+        });
+
+        window.addEventListener('resize', () => {
+            viewportHeight = window.innerHeight;
+            animateCards();
+            animateSections();
+        });
+    });
         </script>
     </body>
 </html>
