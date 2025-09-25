@@ -21,19 +21,37 @@ const carouselChatButton = {
 // Astrologer Section Carousel Data
 const astrologerData = [
   {
-    image: './assets/images/cards/1.jpg',
+    image: './assets/images/astrologers/1.jpg',
     name: 'John Doe',
     title: 'Astrology Expert',
     comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
-    image: './assets/images/cards/2.jpg',
+    image: './assets/images/astrologers/1.jpg',
     name: 'Jane Smith',
     title: 'Tarot Reader',
     comment: 'Pellentesque habitant morbi tristique senectus et netus.'
   },
   {
-    image: './assets/images/cards/3.jpg',
+    image: './assets/images/astrologers/1.jpg',
+    name: 'Robert Brown',
+    title: 'Horoscope Specialist',
+    comment: 'Ut enim ad minim veniam, quis nostrud exercitation.'
+  },
+  {
+    image: './assets/images/astrologers/1.jpg',
+    name: 'Robert Brown',
+    title: 'Horoscope Specialist',
+    comment: 'Ut enim ad minim veniam, quis nostrud exercitation.'
+  },
+  {
+    image: './assets/images/astrologers/1.jpg',
+    name: 'Robert Brown',
+    title: 'Horoscope Specialist',
+    comment: 'Ut enim ad minim veniam, quis nostrud exercitation.'
+  },
+  {
+    image: './assets/images/astrologers/1.jpg',
     name: 'Robert Brown',
     title: 'Horoscope Specialist',
     comment: 'Ut enim ad minim veniam, quis nostrud exercitation.'
