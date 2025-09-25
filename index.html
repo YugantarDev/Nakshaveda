@@ -13,11 +13,11 @@
     <body>
         <header class="hero">
             <nav>
+                <div class="nav-logo">
+                    <a href="#" style="text-decoration: none;">Nakshaveda</a>
+                </div>
                 <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
                 <ul>
-                    <li class="nav-logo">
-                        <a href="#">Nakshaveda</a>
-                    </li>
                     <li>
                         <a href="#home">Home</a>
                     </li>
@@ -45,6 +45,12 @@
                 <h1 class="hero-title"></h1>
                 <p class="hero-subtitle"></p>
             </div>
+            <section class="carousel-section hero-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack"></div>
+                    <div class="carousel-dots" id="carouselDots"></div>
+                </div>
+            </section>
         </header>
         <section class="intro-section">
             <div class="intro-section-left">
@@ -56,6 +62,16 @@
         <section class="card-section">
             <div class="cards-container"></div>
         </section>
+        <section class="astrologer-section">
+            <div class="astrologer-wrapper">
+                <button class="astro-prev">&#10094;</button>
+                <div class="astro-track-container">
+                    <div class="astro-track" id="astroTrack"></div>
+                </div>
+                <button class="astro-next">&#10095;</button>
+            </div>
+            <div class="astro-indicators" id="astroIndicators"></div>
+        </section>
         <section class="form-section">
             <div class="form-left">
                 <h2 class="heading">Sign up and Discover Your Cosmic Path</h2>
@@ -63,19 +79,37 @@
             </div>
             <div class="form-right">
                 <h3 class="form-title">Sign Up - It's Free.</h3>
-                <form action="#" method="post">
+                <form id="signup-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Username" required>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Username"
+                            required
+                        >
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                        <input type="email" placeholder="Re-enter Email" required>
+                        <input
+                            type="tel"
+                            id="mobile-number"
+                            placeholder="Mobile Number"
+                            required
+                        >
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" required>
+                        <select id="purpose-select" name="purpose" required>
+                            <option value="" disabled selected>Select Purpose</option>
+                            <option value="marriage">Marriage</option>
+                            <option value="kundali">Kundali</option>
+                            <option value="career">Career</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
+                    <!-- OTP input section, initially hidden -->
+                    <div class="form-group otp-group" style="display: none;">
+                        <!-- OTP input boxes will be dynamically added here --></div>
                     <div class="form-group">
-                        <button type="submit">Sign Up</button>
+                        <button type="button" id="form-submit-btn">Send OTP</button>
                     </div>
                 </form>
             </div>
@@ -89,150 +123,361 @@
             <button id="stickyJoinBtn">Join</button>
         </div>
         <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Populate Hero
-        document.querySelector('.hero-title').textContent = siteContent.hero.title;
-        document.querySelector('.hero-subtitle').textContent = siteContent.hero.subtitle;
+            document.addEventListener('DOMContentLoaded', () => {
+                // Populate Hero
+                document.querySelector('.hero-title').textContent = siteContent.hero.title;
+                document.querySelector('.hero-subtitle').textContent = siteContent.hero.subtitle;
 
-        // Populate Intro Section
-        const introLeft = document.querySelector('.intro-section-left');
-        const introRight = document.querySelector('.intro-section-right');
-        introLeft.querySelector('.subheading').textContent = siteContent.intro.subheading;
-        introLeft.querySelector('.heading').textContent = siteContent.intro.heading;
-        siteContent.intro.paragraphs.forEach(p => {
-            const para = document.createElement('p');
-            para.textContent = p;
-            introRight.appendChild(para);
-        });
+                // Populate Intro Section
+                const introLeft = document.querySelector('.intro-section-left');
+                const introRight = document.querySelector('.intro-section-right');
+                introLeft.querySelector('.subheading').textContent = siteContent.intro.subheading;
+                introLeft.querySelector('.heading').textContent = siteContent.intro.heading;
+                siteContent.intro.paragraphs.forEach(p => {
+                    const para = document.createElement('p');
+                    para.textContent = p;
+                    introRight.appendChild(para);
+                });
 
-        // Populate Cards
-        const cardsContainer = document.querySelector('.cards-container');
-        siteContent.cards.forEach(card => {
-            const cardEl = document.createElement('div');
-            cardEl.classList.add('card');
-            cardEl.innerHTML = `
-                <div class="card-icon">${card.icon}</div>
-                <h3 class="card-title">${card.title}</h3>
-                <p>${card.description}</p>
-            `;
-            cardsContainer.appendChild(cardEl);
-        });
+                // Populate Cards Dynamically
+                const cardsContainer = document.querySelector('.cards-container');
+                siteContent.cards.forEach(card => {
+                    const cardEl = document.createElement('div');
+                    cardEl.classList.add('card');
 
-        // Select cards AFTER creating them
-        let cards = document.querySelectorAll('.card');
+                    // Make entire card clickable
+                    cardEl.addEventListener('click', () => {
+                        if(card.url) window.open(card.url, '_blank');
+                    });
 
-        // Populate Sections
-        const container = document.querySelector('.container');
-        siteContent.sections.forEach(section => {
-            const sec = document.createElement('div');
-            sec.id = section.id;
-            sec.classList.add('section');
-            sec.innerHTML = `
-                <h2 class="section-title">${section.title}</h2>
-                <p>${section.content}</p>
-            `;
-            container.appendChild(sec);
-        });
+                    // Create card inner HTML
+                    cardEl.innerHTML = `
+                        <div class="card-icon">${card.icon}</div>
+                        <h3 class="card-title">${card.title}</h3>
+                        <p class="card-description">${card.description}</p>
+                        <button class="card-readmore">${card.readMoreText || 'Read more...'}</button>
+                    `;
 
-        // Navigation toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav');
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('open');
-        });
+                    // Make Read More button clickable without triggering card click
+                    const readMoreBtn = cardEl.querySelector('.card-readmore');
+                    readMoreBtn.addEventListener('click', e => {
+                        e.stopPropagation(); // prevent triggering the card click
+                        if(card.url) window.open(card.url, '_blank');
+                    });
 
-        // Sticky Bottom Form
-        const stickyForm = document.getElementById('stickyForm');
-        const stickyJoinBtn = document.getElementById('stickyJoinBtn');
-        setTimeout(() => stickyForm.classList.add('active'), 200);
-        stickyJoinBtn.addEventListener('click', () => {
-            stickyForm.classList.remove('active');
-            alert("Thanks for joining!");
-        });
+                    cardsContainer.appendChild(cardEl);
+                });
 
-        // Scroll Animations
-        const contentSections = document.querySelectorAll('.intro-section, .cards-container, .form-section, .section');
-        let viewportHeight = window.innerHeight;
+                // Populate Sections
+                const container = document.querySelector('.container');
+                siteContent.sections.forEach(section => {
+                    const sec = document.createElement('div');
+                    sec.id = section.id;
+                    sec.classList.add('section');
+                    sec.innerHTML = `
+                        <h2 class="section-title">${section.title}</h2>
+                        <p>${section.content}</p>
+                    `;
+                    container.appendChild(sec);
+                });
 
-        function animateCards() {
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const cardCenter = rect.top + rect.height / 2;
-                const viewportCenter = viewportHeight / 2;
+                // Navigation toggle
+                const menuToggle = document.querySelector('.menu-toggle');
+                const nav = document.querySelector('nav');
+                menuToggle.addEventListener('click', () => {
+                    nav.classList.toggle('open');
+                });
 
-                if (rect.bottom < 0 || rect.top > viewportHeight) {
-                    card.style.transform = `perspective(1000px) translateY(40px) rotateX(-90deg) rotateY(-45deg) rotateZ(-45deg)`;
-                    card.style.transition = `transform 0.3s ease-in-out`;
-                    return;
+                // Sticky Bottom Form
+                const stickyForm = document.getElementById('stickyForm');
+                const stickyJoinBtn = document.getElementById('stickyJoinBtn');
+                setTimeout(() => stickyForm.classList.add('active'), 200);
+                stickyJoinBtn.addEventListener('click', () => {
+                    stickyForm.classList.remove('active');
+                    alert("Thanks for joining!");
+                });
+
+                // Scroll Animations
+                const cards = document.querySelectorAll('.card');
+                const contentSections = document.querySelectorAll('.intro-section, .cards-container, .form-section, .section');
+                let viewportHeight = window.innerHeight;
+
+                function animateCards() {
+                    cards.forEach(card => {
+                        const rect = card.getBoundingClientRect();
+                        const cardCenter = rect.top + rect.height / 2;
+                        const viewportCenter = viewportHeight / 2;
+
+                        if (rect.bottom < 0 || rect.top > viewportHeight) {
+                            card.style.transform = `perspective(1000px) translateY(40px) rotateX(-90deg) rotateY(-45deg) rotateZ(-45deg)`;
+                            card.style.transition = `transform 0.3s ease-in-out`;
+                            return;
+                        }
+
+                        let progress = cardCenter > viewportCenter ? Math.min((viewportHeight - cardCenter) / (viewportHeight / 2), 1) : 1;
+                        progress = Math.max(progress, 0);
+                        const rotateX = -90 * (1 - progress);
+                        const rotateY = -45 * (1 - progress);
+                        const rotateZ = -45 * (1 - progress);
+                        const translateY = 40 * (1 - progress);
+
+                        card.style.transform = `perspective(1000px) translateY(${translateY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+                        card.style.transition = `transform 0.1s ease-out`;
+
+                        if (progress === 1) {
+                            card.style.transform = `perspective(1000px) translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+                            card.style.transition = `transform 0.3s ease-in-out`;
+                        }
+                    });
                 }
 
-                let progress = cardCenter > viewportCenter ? Math.min((viewportHeight - cardCenter) / (viewportHeight / 2), 1) : 1;
-                progress = Math.max(progress, 0);
-                const rotateX = -90 * (1 - progress);
-                const rotateY = -45 * (1 - progress);
-                const rotateZ = -45 * (1 - progress);
-                const translateY = 40 * (1 - progress);
+                function animateSections() {
+                    contentSections.forEach(section => {
+                        const rect = section.getBoundingClientRect();
+                        const viewportCenter = window.innerHeight / 2;
+                        const elementCenter = rect.top + rect.height / 2;
+                        const distance = Math.abs(viewportCenter - elementCenter);
+                        const maxDistance = window.innerHeight / 2 + rect.height / 2;
+                        const progress = 1 - Math.min(1, distance / maxDistance);
+                        const opacity = progress * 1.2;
+                        const scale = 0.8 + (progress * 0.2);
+                        section.style.opacity = opacity;
+                        section.style.transform = `scale(${scale})`;
+                    });
+                }
 
-                card.style.transform = `perspective(1000px) translateY(${translateY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
-                card.style.transition = `transform 0.1s ease-out`;
+                // Initial animation
+                animateCards();
+                animateSections();
 
-                if (progress === 1) {
-                    card.style.transform = `perspective(1000px) translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-                    card.style.transition = `transform 0.3s ease-in-out`;
+                window.addEventListener('scroll', () => {
+                    const scrollPosition = window.scrollY;
+                    const heroHeight = window.innerHeight;
+                    const heroTitle = document.querySelector('.hero-title');
+                    const heroSubtitle = document.querySelector('.hero-subtitle');
+
+                    const heroScaleValue = Math.max(0.5, 1 - scrollPosition / (heroHeight * 0.7));
+                    const heroOpacityValue = Math.max(0, 1 - scrollPosition / (heroHeight * 0.7));
+                    heroTitle.style.transform = `scale(${heroScaleValue})`;
+                    heroTitle.style.opacity = heroOpacityValue;
+                    heroSubtitle.style.transform = `scale(${heroScaleValue})`;
+                    heroSubtitle.style.opacity = heroOpacityValue;
+
+                    animateCards();
+                    animateSections();
+                });
+
+                window.addEventListener('resize', () => {
+                    viewportHeight = window.innerHeight;
+                    animateCards();
+                    animateSections();
+                });
+
+                const signupForm = document.getElementById('signup-form');
+        const otpGroup = document.querySelector('.otp-group');
+        const submitButton = document.getElementById('form-submit-btn');
+        const mobileNumberInput = document.getElementById('mobile-number');
+        const usernameInput = document.getElementById('username');
+
+        let otpSent = false;
+
+        submitButton.addEventListener('click', (e) => {
+            // Prevent default form submission
+            e.preventDefault();
+
+            // Validate fields before sending OTP
+            if (!usernameInput.checkValidity() || !mobileNumberInput.checkValidity()) {
+                signupForm.reportValidity();
+                return;
+            }
+
+            if (!otpSent) {
+                // First click: Send OTP
+                submitButton.textContent = 'Sending OTP...';
+                submitButton.disabled = true;
+
+                // Simulate OTP sending (replace with your backend logic)
+                setTimeout(() => {
+                    otpSent = true;
+                    submitButton.textContent = 'Verify OTP';
+                    submitButton.disabled = false;
+                    otpGroup.style.display = 'flex'; // Show the OTP group
+
+                    // Dynamically create 5 OTP input boxes
+                    otpGroup.innerHTML = '';
+                    for (let i = 0; i < 5; i++) {
+                        const otpInput = document.createElement('input');
+                        otpInput.type = 'number';
+                        otpInput.placeholder = '•';
+                        otpInput.maxLength = 1;
+                        otpInput.classList.add('otp-input');
+                        otpInput.addEventListener('input', (e) => {
+                            if (e.target.value.length === 1 && i < 4) {
+                                otpGroup.children[i + 1].focus();
+                            }
+                        });
+                        otpInput.addEventListener('keydown', (e) => {
+                            if (e.key === 'Backspace' && e.target.value === '' && i > 0) {
+                                otpGroup.children[i - 1].focus();
+                            }
+                        });
+                        otpGroup.appendChild(otpInput);
+                    }
+                    otpGroup.children[0].focus(); // Focus the first input box
+                }, 1000);
+
+            } else {
+                // Second click: Verify OTP
+                const otpInputs = Array.from(document.querySelectorAll('.otp-input'));
+                const otpCode = otpInputs.map(input => input.value).join('');
+
+                if (otpCode.length === 5) {
+                    // Simulate OTP verification (replace with your backend logic)
+                    submitButton.textContent = 'Verifying...';
+                    submitButton.disabled = true;
+
+                    setTimeout(() => {
+                        alert("OTP Verified! You can now proceed.");
+                        submitButton.textContent = 'Sign Up';
+                        submitButton.disabled = false;
+                        // From here, you would submit the form or perform other actions
+                        // For demonstration, we'll log the form data.
+                        console.log('Form Submitted!', {
+                            username: usernameInput.value,
+                            mobile: mobileNumberInput.value,
+                            purpose: document.getElementById('purpose-select').value,
+                            otp: otpCode
+                        });
+                    }, 1000);
+                } else {
+                    alert("Please enter the complete 5-digit OTP.");
+                }
+            }
+        });
+
+                // Astrologer Carousel
+               const astroTrack = document.getElementById('astroTrack');
+        const astroIndicators = document.getElementById('astroIndicators');
+        const prevBtn = document.querySelector('.astro-prev');
+        const nextBtn = document.querySelector('.astro-next');
+        const astrologers = [
+            { name: "Astro A", title: "Vedic Astrologer", comment: "Expert in charts.", image: "./assets/img/astro1.jpg" },
+            { name: "Astro B", title: "Palm Reader", comment: "Specialist in hands.", image: "./assets/img/astro2.jpg" },
+            { name: "Astro C", title: "Numerologist", comment: "Numbers reveal all.", image: "./assets/img/astro3.jpg" },
+            { name: "Astro D", title: "Tarot Expert", comment: "Read your fate.", image: "./assets/img/astro4.jpg" },
+            { name: "Astro E", title: "Jyotish Specialist", comment: "Accurate readings.", image: "./assets/img/astro5.jpg" }
+        ];
+
+        let astroIndex = 0;
+        const totalCards = astrologers.length;
+
+        // Clone cards for infinite effect
+        const clonedCardsBefore = astrologers.slice(-2);
+        const clonedCardsAfter = astrologers.slice(0, 2);
+        const allCards = [...clonedCardsBefore, ...astrologers, ...clonedCardsAfter];
+
+        const createCard = (astro) => {
+            const card = document.createElement('div');
+            card.className = 'astro-card';
+            card.innerHTML = `
+                <img src="${astro.image}" alt="${astro.name}">
+                <h3>${astro.name}</h3>
+                <p>${astro.title}</p>
+                <p>${astro.comment}</p>
+            `;
+            return card;
+        };
+
+        const renderCarousel = () => {
+            astroTrack.innerHTML = '';
+            astroIndicators.innerHTML = '';
+            allCards.forEach(astro => astroTrack.appendChild(createCard(astro)));
+            astrologers.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.addEventListener('click', () => {
+                    astroIndex = idx;
+                    updateCarousel();
+                });
+                astroIndicators.appendChild(dot);
+            });
+        };
+
+        const updateCarousel = () => {
+            const cards = astroTrack.querySelectorAll('.astro-card');
+            if (cards.length === 0) return;
+
+            cards.forEach(card => card.classList.remove('active'));
+            cards[astroIndex + 2].classList.add('active');
+
+            const cardWidth = cards[0].offsetWidth;
+            const cardGap = 20;
+            const cardFullWidth = cardWidth + cardGap;
+            let translateX;
+
+            if (window.innerWidth <= 768) {
+                // Mobile: show one card at a time, centered
+                translateX = (astroIndex + 2) * cardFullWidth - (window.innerWidth / 2 - cardWidth / 2);
+            } else {
+                // Desktop: show three cards with center one scaled
+                const containerWidth = document.querySelector('.astro-track-container').offsetWidth;
+                const cardCenterOffset = containerWidth / 2 - cardFullWidth / 2;
+                translateX = (astroIndex + 2) * cardFullWidth - cardCenterOffset;
+            }
+
+            astroTrack.style.transition = 'transform 0.3s ease-in-out';
+            astroTrack.style.transform = `translateX(-${translateX}px)`;
+
+            // Update indicators to show only 3 dots
+            const dots = astroIndicators.querySelectorAll('button');
+            dots.forEach((dot, idx) => {
+                dot.classList.remove('active', 'visible');
+                // Make the current dot active
+                if (idx === astroIndex) {
+                    dot.classList.add('active');
+                }
+                // Determine which dots should be visible
+                if (idx === astroIndex || idx === (astroIndex + 1) % totalCards || idx === (astroIndex - 1 + totalCards) % totalCards) {
+                    dot.classList.add('visible');
                 }
             });
-        }
+        };
 
-        function animateSections() {
-            contentSections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const viewportCenter = window.innerHeight / 2;
-                const elementCenter = rect.top + rect.height / 2;
-                const distance = Math.abs(viewportCenter - elementCenter);
-                const maxDistance = window.innerHeight / 2 + rect.height / 2;
-                const progress = 1 - Math.min(1, distance / maxDistance);
-                const opacity = progress * 1.2;
-                const scale = 0.8 + (progress * 0.2);
-                section.style.opacity = opacity;
-                section.style.transform = `scale(${scale})`;
-            });
-        }
+        const handleTransitionEnd = () => {
+            if (astroIndex === -1) {
+                astroTrack.style.transition = 'none';
+                astroIndex = totalCards - 1;
+                updateCarousel();
+            } else if (astroIndex === totalCards) {
+                astroTrack.style.transition = 'none';
+                astroIndex = 0;
+                updateCarousel();
+            }
+        };
 
-        // Initial animation
-        animateCards();
-        animateSections();
-
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            const heroHeight = window.innerHeight;
-            const heroTitle = document.querySelector('.hero-title');
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-
-            const heroScaleValue = Math.max(0.5, 1 - scrollPosition / (heroHeight * 0.7));
-            const heroOpacityValue = Math.max(0, 1 - scrollPosition / (heroHeight * 0.7));
-            heroTitle.style.transform = `scale(${heroScaleValue})`;
-            heroTitle.style.opacity = heroOpacityValue;
-            heroSubtitle.style.transform = `scale(${heroScaleValue})`;
-            heroSubtitle.style.opacity = heroOpacityValue;
-
-            animateCards();
-            animateSections();
+        nextBtn.addEventListener('click', () => {
+            astroIndex++;
+            updateCarousel();
         });
 
-        window.addEventListener('resize', () => {
-            viewportHeight = window.innerHeight;
-            animateCards();
-            animateSections();
+        prevBtn.addEventListener('click', () => {
+            astroIndex--;
+            updateCarousel();
         });
+
+        astroTrack.addEventListener('transitionend', handleTransitionEnd);
+
+        renderCarousel();
+        updateCarousel();
+        window.addEventListener('resize', updateCarousel);
     });
-
-    // Navigation toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('nav ul'); // target ul
-
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('open'); // add/remove 'open' class
-});
+            // // Navigation toggle
+            // const menuToggle = document.querySelector('.menu-toggle');
+            // const navMenu = document.querySelector('nav ul');
+            // menuToggle.addEventListener('click', () => {
+            //     navMenu.classList.toggle('open');
+            // });
         </script>
+        <script src="./assets/js/carouselData.js"></script>
+        <script src="./assets/js/carousel.js"></script>
     </body>
 </html>

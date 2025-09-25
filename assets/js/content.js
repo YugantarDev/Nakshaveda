@@ -13,28 +13,36 @@ const siteContent = {
   },
   cards: [
     {
-      icon: '☀️',
+      icon: '☀️', // emoji or could be replaced with <img src="..." />
       title: 'Your Sun Sign',
       description:
-        'The core of your personality and identity. Your Sun sign reflects your fundamental character and ego.'
+        'The core of your personality and identity. Your Sun sign reflects your fundamental character and ego.',
+      url: 'https://example.com/sun-sign',
+      readMoreText: 'Read more...'
     },
     {
       icon: '🌙',
       title: 'Your Moon Sign',
       description:
-        'Represents your inner world, emotions, and intuition. It reveals your deepest feelings and how you react to life.'
+        'Represents your inner world, emotions, and intuition. It reveals your deepest feelings and how you react to life.',
+      url: 'https://example.com/moon-sign',
+      readMoreText: 'Read more...'
     },
     {
       icon: '⬆️',
       title: 'Your Rising Sign',
       description:
-        'This is your astrological mask, representing how you appear to others and your first impressions.'
+        'This is your astrological mask, representing how you appear to others and your first impressions.',
+      url: 'https://example.com/rising-sign',
+      readMoreText: 'Read more...'
     },
     {
       icon: '✨',
       title: 'Planetary Transits',
       description:
-        'Explore how current planetary movements affect your life, opportunities, and challenges.'
+        'Explore how current planetary movements affect your life, opportunities, and challenges.',
+      url: 'https://example.com/planetary-transits',
+      readMoreText: 'Read more...'
     }
   ],
   sections: [

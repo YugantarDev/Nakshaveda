@@ -1,0 +1,23 @@
+logo add on top beside menu button --- done
+carousle image at main image , or video 16:9 ---done
+different video size for desktop and mobile to show in main image ---done
+dynamic button in main image below with dynamic url,font-size,font-family ---done
+image,title,description,url , with fix 20 characters for clik to join button
+image on right, and text left or reverse
+
+welcome to the cosmos big font----done
+next font-size small---done
+
+clickable cards ----done
+
+
+more intro section with astrologer carousel images on click show popup with profile details of astrologer ---done
+
+befor signup	---done
+
+
+name,mobile,purpose-drop down otp verfication---done
+
+ no below cards in landing page--optional
+ 
+ 
