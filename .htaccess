@@ -1,13 +1,12 @@
-# Disable MultiViews to prevent conflicts
-Options -MultiViews
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
 
-# Enable URL rewriting
-RewriteEngine On
+  # If file or directory exists, serve it
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
-# If the requested file or folder exists, serve it
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Otherwise, redirect everything to index.html
-RewriteRule ^ index.html [L]
+  # Otherwise, redirect to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
