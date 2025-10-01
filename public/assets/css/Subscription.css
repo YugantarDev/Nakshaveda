@@ -1,0 +1,256 @@
+/* General Layout and Structure (Modified for explicit spacing) */
+
+.row.f-card.no-margin-b {
+    display: flex;
+    /* Makes the two columns align side-by-side */
+    flex-wrap: wrap;
+    /* Allows wrapping on smaller screens */
+    margin-bottom: 0 !important;
+    /* Use gap for spacing between the two m6 columns */
+    gap: 20px;
+    /* Explicit gap between the cards, adjust as needed */
+    padding: 0 10px;
+    /* Add some padding to the row container if needed */
+    justify-content: center;
+    /* Center the cards if there's extra space */
+}
+
+.col.s12.m6 {
+    /* Override Materialize default column padding/margin if necessary 
+       and ensure they take equal space minus the gap */
+    /* On medium and larger screens (m6), this calc makes them fit with the gap */
+    width: calc(50% - 10px);
+    /* 50% width minus half the gap (20px gap / 2 = 10px) */
+    padding: 0 !important;
+    /* Remove internal column padding to let the card-panel control the space */
+}
+
+.card-panel {
+    /* Base style for the containers */
+    padding: 20px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 2px;
+    width: 100%;
+    /* Ensure the card panel fills the m6 column */
+}
+
+.no-card-margin-t {
+    margin-top: 0 !important;
+}
+
+.min-height-490 {
+    min-height: 490px;
+    /* To make both cards roughly the same height */
+}
+
+/* --- Packages Section Styling --- */
+
+.package-item {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+/* Package Title and Description */
+.f-card-title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.margin-t-32 {
+    margin-top: 32px !important;
+}
+
+.no-margin-b {
+    margin-bottom: 0 !important;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Image and Pricing/Button Alignment */
+.valign-wrapper {
+    display: flex;
+    align-items: center;
+    /* Vertically center image and price block */
+    justify-content: center;
+}
+
+.valign-wrapper>.col {
+    padding: 0 15px;
+}
+
+.valign-wrapper img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Price Display */
+.margin-b {
+    margin-bottom: 15px;
+}
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+.col.s6.m4.center p {
+    font-size: 18px;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.col.s6.m4.center strike {
+    color: #999;
+    font-weight: 400;
+}
+
+.col.s6.m4.center .btn {
+    /* Style for the 'BUY NOW' button */
+    background-color: #ff9800 !important;
+    /* Amber */
+    color: #fff !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0 16px;
+    height: 36px;
+    line-height: 36px;
+}
+
+/* Ribbon/Offer Tag Styling */
+.ribbon-1 {
+    position: absolute;
+    left: -10px;
+    /* Slightly off the edge for effect */
+    top: -10px;
+    /* Slightly off the edge for effect */
+    z-index: 10;
+    overflow: hidden;
+    width: 75px;
+    /* Width of the ribbon area */
+    height: 75px;
+    /* Height of the ribbon area */
+    text-align: center;
+}
+
+.ribbon-1 span {
+    position: absolute;
+    display: block;
+    width: 120px;
+    /* Length of the diagonal band */
+    padding: 6px 0;
+    background-color: #f44336;
+    /* Red color for offers */
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    top: 15px;
+    /* Positioning the band */
+    left: -25px;
+    /* Positioning the band */
+    transform: rotate(-45deg);
+    /* Diagonal rotation */
+}
+
+/* Orange Dots (Paginator/Indicator) Styling */
+/* The element for dots is implicitly below the map, targeting with simple classes is best */
+.package-item+div {
+    /* This targets the div containing the dots after the package-item */
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.package-item+div .orange:nth-child(1) {
+    /* Style for the active/selected dot */
+    background-color: #ff9800;
+    /* Amber/Orange */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.package-item+div .orange:nth-child(2) {
+    /* Style for the inactive dot */
+    background-color: #e0e0e0;
+    /* Light gray */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+/* --- Categories Section Styling --- */
+
+.body-content p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Category List (Materialize Collection) */
+.collection {
+    border: 1px solid #e0e0e0;
+    /* Light border around the whole list */
+    margin: 0;
+}
+
+.collection-item {
+    background-color: #fff;
+    line-height: 1.5;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+    color: rgba(0, 0, 0, 0.87);
+    /* Default text color */
+    display: block;
+    /* Makes the entire item clickable */
+    transition: background-color 0.3s;
+}
+
+.collection-item:last-child {
+    border-bottom: none;
+    /* No border for the last item */
+}
+
+.collection-item:hover {
+    background-color: #f5f5f5;
+    /* Slight hover effect */
+}
+
+.margin-t {
+    margin-top: 15px !important;
+}
+
+/* Ensure responsiveness for columns (Standard Materialize or Flexbox) */
+@media (max-width: 992px) {
+
+    /* For medium and small screens */
+    .row.f-card.no-margin-b {
+        flex-direction: column;
+        gap: 0;
+        /* Remove gap when stacking columns */
+        padding: 0;
+    }
+
+    .col.s12.m6 {
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .min-height-490 {
+        min-height: auto;
+    }
+}
